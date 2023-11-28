@@ -1,0 +1,16 @@
+{
+  "name": "image-service",
+  "version": "1.0.0",
+  "description": "Microservice to support image upload/download and manipulation by drawing on images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mikael Söderström Broström & Nuh Jama Mohamud",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
