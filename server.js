@@ -17,7 +17,8 @@ const upload = multer({
 })
 
 const pool = mysql.createPool({
-    host: '127.0.0.1',
+    host: 'host.docker.internal', // how will this work when doing kubernetes/cloud?
+    port: 3307,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: 'PatientInfo'
@@ -41,6 +42,7 @@ app.use(express.json())
 app.use(cors({
     origin: 'http://localhost:4000', // Allow requests only from localhost:4000
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+    methods: 'GET,POST,PUT',
 }));
 
 app.post('/upload', upload.single('image'), (req, res) => {
@@ -55,6 +57,25 @@ app.post('/upload', upload.single('image'), (req, res) => {
         }
 
         res.status(200).send('Image uploaded successfully');
+    });
+});
+
+app.post('/save/:imageId', upload.single('image'), (req, res) => {
+    if(!req.file) {
+        return res.status(400).send('no file uploaded')
+    }
+    const imageId = req.params.imageId;
+    const imageData = req.file.buffer;
+
+    // Update the image data in the database based on the imageId
+    pool.query('UPDATE images SET data = ? WHERE id = ?', [imageData, imageId], (error, results, fields) => {
+        if (error) {
+            console.error('Error updating image:', error.message);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        res.status(200).send('Image updated successfully');
     });
 });
 
