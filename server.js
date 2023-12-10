@@ -41,15 +41,16 @@ pool.query(`
 app.use(express.json())
 
 app.use(cors({
-    origin: 'https://patient-journal.app.cloud.cbh.kth.se',
+    origin: '*',
     credentials: true,
     methods: 'GET,POST,PUT',
     headers: {
-        'Access-Control-Allow-Origin': 'https://patient-journal.app.cloud.cbh.kth.se',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,POST,PUT',
         'Access-Control-Allow-Headers': 'Content-Type',
     },
 }));
+
 
 
 app.post('/upload', upload.single('image'), (req, res) => {
