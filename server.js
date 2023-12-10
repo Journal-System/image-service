@@ -103,6 +103,10 @@ app.get('/download/:imageId', (req, res) => {
     });
 });
 
+app.get('/healthz'), (req, res) => {
+    res.status(200).send('OK');
+}
+
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
