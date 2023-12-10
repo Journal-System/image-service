@@ -20,8 +20,8 @@ const upload = multer({
 const pool = mysql.createPool({
     host: 'vm.cloud.cbh.kth.se', 
     port: 2776,
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
+    user: "root",
+    password: "PASSWORD123",
     database: 'PatientInfo'
 })
 
