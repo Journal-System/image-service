@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const app = express()
 const port = 8084
-const host = 'https://image-servie.app.cloud.cbh.kth.se'
+const host = 'image-servie.app.cloud.cbh.kth.se'
 
 
 const storage = multer.memoryStorage();
@@ -42,8 +42,8 @@ pool.query(`
 app.use(express.json())
 
 app.use(cors({
-    origin: 'https://patient-journal.app.cloud.cbh.kth.se', // Allow requests only from specified
-    credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+    origin: '*', // Allow any origin for now, adjust as needed
+    credentials: true,
     methods: 'GET,POST,PUT',
 }));
 
@@ -111,5 +111,6 @@ app.get('/healthz', (req, res) => {
 
 
 app.listen(port, host, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at https://${host}:${port}`);
+    console.log(`Health check endpoint: https://${host}:${port}/healthz`);
 });
