@@ -7,7 +7,6 @@ require('dotenv').config();
 
 const app = express()
 const port = 8084
-const host = 'image-servie.app.cloud.cbh.kth.se'
 
 
 const storage = multer.memoryStorage();
@@ -42,10 +41,16 @@ pool.query(`
 app.use(express.json())
 
 app.use(cors({
-    origin: '*', // Allow any origin for now, adjust as needed
+    origin: 'https://patient-journal.app.cloud.cbh.kth.se',
     credentials: true,
     methods: 'GET,POST,PUT',
+    headers: {
+        'Access-Control-Allow-Origin': 'https://patient-journal.app.cloud.cbh.kth.se',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT',
+        'Access-Control-Allow-Headers': 'Content-Type',
+    },
 }));
+
 
 app.post('/upload', upload.single('image'), (req, res) => {
     const imageData = req.file.buffer; // The image data in a Buffer
@@ -110,7 +115,7 @@ app.get('/healthz', (req, res) => {
 });
 
 
-app.listen(port, host, () => {
-    console.log(`Server is running at https://${host}:${port}`);
-    console.log(`Health check endpoint: https://${host}:${port}/healthz`);
+app.listen(port, () => {
+    console.log(`Server is running at ${port}`);
+    console.log(`Health check endpoint: ${port}/healthz`);
 });
