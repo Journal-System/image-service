@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const app = express()
 const port = 8084
+const host = 'image-servie.app.cloud.cbh.kth.se'
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -103,10 +104,11 @@ app.get('/download/:imageId', (req, res) => {
     });
 });
 
-app.get('/healthz'), (req, res) => {
+app.get('/healthz', (req, res) => {
     res.status(200).send('OK');
-}
+});
 
-app.listen(port, () => {
+
+app.listen(port, host, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
