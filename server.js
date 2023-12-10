@@ -17,8 +17,8 @@ const upload = multer({
 })
 
 const pool = mysql.createPool({
-    host: 'host.docker.internal', // how will this work when doing kubernetes/cloud?
-    port: 3307,
+    host: 'vm.cloud.cbh.kth.se', 
+    port: 2776,
     user: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: 'PatientInfo'
@@ -40,7 +40,7 @@ pool.query(`
 app.use(express.json())
 
 app.use(cors({
-    origin: 'http://localhost:4000', // Allow requests only from localhost:4000
+    origin: 'https://patient-journal.app.cloud.cbh.kth.se', // Allow requests only from specified
     credentials: true, // Enable credentials (cookies, authorization headers, etc.)
     methods: 'GET,POST,PUT',
 }));
