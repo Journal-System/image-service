@@ -7,7 +7,8 @@ require('dotenv').config();
 
 const app = express()
 const port = 8084
-const host = 'image-servie.app.cloud.cbh.kth.se'
+const host = 'https://image-servie.app.cloud.cbh.kth.se'
+
 
 const storage = multer.memoryStorage();
 const upload = multer({
