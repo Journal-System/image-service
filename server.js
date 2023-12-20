@@ -121,5 +121,4 @@ app.listen(port, () => {
     console.log(`Health check endpoint: ${port}/healthz`);
 });
 
-
 module.exports = app; 
