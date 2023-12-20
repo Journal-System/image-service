@@ -120,3 +120,5 @@ app.listen(port, () => {
     console.log(`Server is running at ${port}`);
     console.log(`Health check endpoint: ${port}/healthz`);
 });
+
+module.exports = app; 
