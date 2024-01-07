@@ -5,7 +5,7 @@ let _keycloak;
 
 var keycloakConfig = {
     clientId: 'user-service',
-    bearerOnly: false,
+    bearerOnly: true,
     serverUrl: 'https://key-cloak.app.cloud.cbh.kth.se/',
     realm: 'HealthHarbor-Realm',
     credentials: {
@@ -13,14 +13,13 @@ var keycloakConfig = {
     }
 };
 
-function initKeycloak() {
+function initKeycloak(memoryStore) {
     if (_keycloak) {
         console.warn("Trying to init Keycloak again!");
         return _keycloak;
     } 
     else {
         console.log("Initializing Keycloak...");
-        var memoryStore = new session.MemoryStore();
         _keycloak = new Keycloak({ store: memoryStore }, keycloakConfig);
         return _keycloak;
     }
