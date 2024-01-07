@@ -21,7 +21,7 @@ const upload = multer({
 })
 
 const pool = mysql.createPool({
-    host: 'vm.cloud.cbh.kth.se', 
+    host: 'vm.cloud.cbh.kth.se',
     port: 2776,
     user: "root",
     password: "PASSWORD123",
@@ -44,16 +44,15 @@ pool.query(`
 app.use(express.json())
 
 const corsOptions = {
-    origin: '*', // Allow all origins
-    credentials: true, // Enable credentials
-    methods: 'GET,POST,PUT,OPTIONS', // Explicitly specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Explicitly specify allowed headers
-  };
-  
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable preflight for all routes
-  
+    origin: 'http://localhost:4000,https://patient-journal.app.cloud.cbh.kth.se',
+    credentials: true,
+    methods: 'GET,POST,PUT,OPTIONS',
+    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
+};
 
+app.use(cors(corsOptions));
+
+app.options('*', cors())
 
 app.post('/upload', keycloak.protect('DOCTOR'), upload.single('image'), (req, res) => {
     const imageData = req.file.buffer; // The image data in a Buffer
@@ -123,4 +122,4 @@ app.listen(port, () => {
     console.log(`Health check endpoint: ${port}/healthz`);
 });
 
-module.exports = app; 
+module.exports = app;
