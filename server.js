@@ -52,7 +52,7 @@ pool.query(`
 app.use(express.json())
 
 const corsOptions = {
-    origin: 'http://localhost:4000,https://patient-journal.app.cloud.cbh.kth.se',
+    origin: 'https://patient-journal.app.cloud.cbh.kth.se',
     credentials: true,
     methods: 'GET,POST,PUT,OPTIONS',
     allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
