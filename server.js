@@ -44,10 +44,15 @@ pool.query(`
 app.use(express.json())
 
 app.use(cors({
-    origin: '*',               // Allow all origins
-    credentials: true,         // Enable credentials
-    methods: 'GET,POST,PUT,OPTIONS', // Include OPTIONS in the allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Explicitly allow custom headers
+    origin: '*',
+    credentials: true,
+    methods: 'GET,POST,PUT,OPTIONS',
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
+    },
+    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
 }));
 
 
