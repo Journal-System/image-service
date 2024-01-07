@@ -1,6 +1,7 @@
 const mysql = require('mysql2')
 const multer = require('multer')
 const express = require('express')
+const session = require('express-session');
 const cors = require('cors')
 require('dotenv').config();
 
@@ -9,6 +10,13 @@ const keycloak = require('./config/keycloak-config.js').initKeycloak();
 
 const app = express()
 const port = 8084
+
+app.use(session({
+    secret: 'PASSWORD123', // Replace with your secret key
+    resave: false,
+    saveUninitialized: true,
+    store: new session.MemoryStore() // Or another session store for production
+}));
 
 app.use(keycloak.middleware());
 
