@@ -43,19 +43,16 @@ pool.query(`
 
 app.use(express.json())
 
-app.use(cors({
-    origin: '*',
-    credentials: true,
-    methods: 'GET,POST,PUT,OPTIONS',
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization', 
-    },
-    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
-}));
-
-app.options('*', cors()); // Enable preflight for all routes
+const corsOptions = {
+    origin: '*', // Allow all origins
+    credentials: true, // Enable credentials
+    methods: 'GET,POST,PUT,OPTIONS', // Explicitly specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Explicitly specify allowed headers
+  };
+  
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight for all routes
+  
 
 
 app.post('/upload', keycloak.protect('DOCTOR'), upload.single('image'), (req, res) => {
