@@ -12,7 +12,7 @@ const app = express()
 const port = 8084
 
 app.use(session({
-    secret: 'PASSWORD123', // Replace with your secret key
+    secret: 'bDphhdOrw0VDIU0O1zoxPU6dM9ZvFCMM', // Replace with your secret key
     resave: false,
     saveUninitialized: true,
     store: new session.MemoryStore() // Or another session store for production
