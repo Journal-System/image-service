@@ -5,6 +5,7 @@ let _keycloak;
 
 var keycloakConfig = {
     clientId: 'user-service',
+    cors: false,
     bearerOnly: true,
     serverUrl: 'https://key-cloak.app.cloud.cbh.kth.se/',
     realm: 'HealthHarbor-Realm',
