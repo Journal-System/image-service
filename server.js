@@ -43,16 +43,7 @@ pool.query(`
 
 app.use(express.json())
 
-app.use(cors({
-    origin: '*',
-    credentials: true,
-    methods: 'GET,POST,PUT',
-    headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,PUT',
-        'Access-Control-Allow-Headers': 'Content-Type',
-    },
-}));
+app.use(cors());
 
 
 
