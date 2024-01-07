@@ -5,7 +5,7 @@ let _keycloak;
 
 var keycloakConfig = {
     clientId: 'user-service',
-    bearerOnly: true,
+    bearerOnly: false,
     serverUrl: 'https://key-cloak.app.cloud.cbh.kth.se/',
     realm: 'HealthHarbor-Realm',
     credentials: {
