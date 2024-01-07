@@ -4,10 +4,13 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config();
 
+const keycloak = require('./config/keycloak-config.js').initKeycloak();
+
 
 const app = express()
 const port = 8084
 
+app.use(keycloak.middleware());
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -53,7 +56,7 @@ app.use(cors({
 
 
 
-app.post('/upload', upload.single('image'), (req, res) => {
+app.post('/upload', keycloak.protect('DOCTOR'), upload.single('image'), (req, res) => {
     const imageData = req.file.buffer; // The image data in a Buffer
 
     // Save the image data to the database
@@ -68,7 +71,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
     });
 });
 
-app.post('/save/:imageId', upload.single('image'), (req, res) => {
+app.post('/save/:imageId', keycloak.protect('DOCTOR'), upload.single('image'), (req, res) => {
     if(!req.file) {
         return res.status(400).send('no file uploaded')
     }
@@ -87,7 +90,7 @@ app.post('/save/:imageId', upload.single('image'), (req, res) => {
     });
 });
 
-app.get('/download/:imageId', (req, res) => {
+app.get('/download/:imageId', keycloak.protect('DOCTOR'), (req, res) => {
     const imageId = req.params.imageId;
 
     // Retrieve image data from the database based on the imageId
