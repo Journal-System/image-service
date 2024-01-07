@@ -17,7 +17,7 @@ app.use(session({
     secret: 'bDphhdOrw0VDIU0O1zoxPU6dM9ZvFCMM', // Replace with your secret key
     resave: false,
     saveUninitialized: true,
-    store: new session.MemoryStore() // Or another session store for production
+    store: memoryStore // Or another session store for production
 }));
 
 app.use(keycloak.middleware());
