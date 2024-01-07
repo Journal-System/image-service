@@ -55,6 +55,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
 }));
 
+app.options('*', cors()); // Enable preflight for all routes
 
 
 app.post('/upload', keycloak.protect('DOCTOR'), upload.single('image'), (req, res) => {
