@@ -11,6 +11,8 @@ const keycloak = require('./config/keycloak-config.js').initKeycloak();
 const app = express()
 const port = 8084
 
+app.use(keycloak.middleware());
+
 app.use(session({
     secret: 'bDphhdOrw0VDIU0O1zoxPU6dM9ZvFCMM', // Replace with your secret key
     resave: false,
@@ -18,7 +20,6 @@ app.use(session({
     store: new session.MemoryStore() // Or another session store for production
 }));
 
-app.use(keycloak.middleware());
 
 const storage = multer.memoryStorage();
 const upload = multer({
